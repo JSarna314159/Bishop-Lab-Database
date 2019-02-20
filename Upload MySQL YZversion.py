@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Sep  6 15:51:16 2018
+Created on Fri Oct 26 17:51:11 2018
 
-@author: jsarna
+@author: Jackie
 """
 
-#20180923
+#20181029
 
 #import cProfile
 import os
@@ -127,98 +127,83 @@ def DBColumnCheck(myrow):
     else:
         print('Column error [8]')
         return False    
-    if PosInts.match(myrow[9]): #'Mass'
+    if PosFloats.match(myrow[9]): #'Mass'
         pass
     elif NC.match(myrow[9]):
-        pass
+        myrow[9] = None
     else:
         print('Column error [9]')
         return False
     if isinstance(myrow[10], float) is True: #'pI'
         pass
     elif NC.match(myrow[10]):
-        pass
+        myrow[10] = None
     else:
         print('Column error [10]')
         return False    
     if isinstance(myrow[11], float) is True: #'Length'
         pass
     elif NC.match(myrow[11]):
-        pass
+        myrow[11] = None
     else:
         print('Column error [11]')
         return False    
     if isinstance(myrow[12], float) is True: #'Aliphatic_Index'
         pass
     elif NC.match(myrow[12]):
-        pass
+        myrow[12] = None
     else:
         print('Column error [12]')
         return False    
     if isinstance(myrow[13], float) is True: #'Net_Charge'
         pass
     elif NC.match(myrow[13]):
-        pass
+        myrow[13] = None
     else:
         print('Column error [13]')
         return False    
     if isinstance(myrow[14], float) is True: #'Hydropathy'
         pass
     elif NC.match(myrow[14]):
-        pass
+        myrow[14] = None
     else:
         print('Column error [14]')
         return False        
     if isinstance(myrow[15], float) is True: #'Charge_Per_Residue'
         pass
     elif NC.match(myrow[15]):
-        pass
+        myrow[15] = None
     else:
         print('Column error [15]')
         return False    
     if NAMP.match(myrow[16]): #'SVM_Class'
         pass
     elif NC.match(myrow[16]):
-        pass
+        myrow[16] = None
     else:
         print('Column error [16]')
         return False
     if isinstance(myrow[17], float) is True: #'SVM_AMP_Prob'
         pass
     elif NC.match(myrow[17]):
-        pass
+        myrow[17] = None
     else:
         print('Column error [17]')
         return False
     if NAMP.match(myrow[18]): #'RF_Class'
         pass
     elif NC.match(myrow[18]):
-        pass
+        myrow[18] = None
     else:
         print('Column error [18]')
         return False
     if isinstance(myrow[19], float) is True: #'RF_AMP_Prob'
         pass
     elif NC.match(myrow[19]):
-        pass
+        myrow[19] = None
     else:
         print('Column error [19]')
         return False
-    if NAMP.match(myrow[20]): #'DA_Class'
-        pass
-    elif NC.match(myrow[20]): 
-        pass
-    else:
-        print('Column error [20]')
-        return False
-    if isinstance(myrow[21], float) is True: #'DA_AMP_Prob'
-        pass
-    elif NC.match(myrow[21]):
-        pass
-    else:
-        print('Column error [21]')
-        return False
-    return True
 
 def DNColumnCheck(myrow):
     yesno = re.compile('Y|N') #column must either have 'Y' or 'N'
@@ -239,7 +224,6 @@ def DNColumnCheck(myrow):
         return False
     if isinstance(myrow[2], str) is not True: #'Peptide'
         print('Column error [2]')
-        print(myrow[2].value)
         return False    
     if PosInts.match(myrow[3]): #'Tag_length'
         pass
@@ -291,91 +275,91 @@ def DNColumnCheck(myrow):
     if PosInts.match(myrow[13]): #'Mass'
         pass
     elif NC.match(myrow[13]): 
-        pass
+        myrow[13] = None
     else:
         print('Column error [13]')
         return False
     if isinstance(myrow[14], float) is True: #'pI'
         pass
     elif NC.match(myrow[14]): 
-        pass
+        myrow[14] = None
     else:
         print('Column error [14]')
         return False    
     if isinstance(myrow[15], float) is True: #'Length'
         pass
     elif NC.match(myrow[15]):
-        pass
+        myrow[15] = None
     else:
         print('Column error [15]')
         return False    
     if isinstance(myrow[16], float) is True: #'Aliphatic_Index'
         pass
     elif NC.match(myrow[16]):
-        pass
+        myrow[16] = None
     else:
         print('Column error [16]')
         return False    
     if isinstance(myrow[17], float) is True: #'Net_Charge'
         pass
     elif NC.match(myrow[17]):
-        pass
+        myrow[17] = None
     else:
         print('Column error [17]')
         return False    
     if isinstance(myrow[18], float) is True: #'Hydropathy'
         pass
     elif NC.match(myrow[18]):
-        pass
+        myrow[18] = None
     else:
         print('Column error [18]')
         return False        
     if isinstance(myrow[19], float) is True: #'Charge_Per_Residue'
         pass
     elif NC.match(myrow[19]):
-        pass
+        myrow[19] = None
     else:
         print('Column error [19]')
         return False    
     if NAMP.match(myrow[20]): #'SVM_Class'
         pass
     elif NC.match(myrow[20]):
-        pass
+        myrow[20] = None
     else:
         print('Column error [20]')
         return False
     if isinstance(myrow[21], float) is True: #'SVM_AMP_Prob'
         pass
     elif NC.match(myrow[21]):
-        pass
+        myrow[21] = None
     else:
         print('Column error [21]')
         return False
     if NAMP.match(myrow[22]): #'RF_Class'
         pass
     elif NC.match(myrow[22]):
-        pass
+        myrow[22] = None
     else:
         print('Column error [22]')
         return False
     if isinstance(myrow[23], float) is True: #'RF_AMP_Prob'
         pass
     elif NC.match(myrow[23]):
-        pass
+        myrow[23] = None
     else:
         print('Column error [23]')
         return False
     if NAMP.match(myrow[24]): #'DA_Class'
         pass
     elif NC.match(myrow[24]): 
-        pass
+        myrow[24] = None
     else:
         print('Column error [24]')
         return False
     if isinstance(myrow[25], float) is True: #'DA_AMP_Prob'
         pass
     elif NC.match(myrow[25]):
-        pass
+        myrow[25] = None
     else:
         print('Column error [25]')
         return False
@@ -404,7 +388,7 @@ def UPLOADFUNCTION():
                 myrow.append(i+1)
                 myrow.append(myfilename + str(i+1))
                 myrow.extend(FileNameInformation(myfilename))
-                PutDeNovoExcelInSQL = '''INSERT INTO De_Novo(DNID,Scan,Peptide,Tag_length,ALC,M_over_Z,Z,RT,ppm,PTM,Local_Confidence,tag,mode,Mass,pI,Length,Aliphatic_Index,Net_Charge,Hydropathy,Charge_Per_Residue,SVM_Class,SVM_AMP_Prob,RF_Class,RF_AMP_Prob,DA_Class,DA_AMP_Prob,Filename,Myrowid,UniqueID,Species,Date_Raw_Data_Acquired,Location,Author) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+                PutDeNovoExcelInSQL = '''INSERT INTO De_Novo(DNID,Scan,Peptide,Tag_length,ALC,M_over_Z,Z,RT,ppm,PTM,Local_Confidence,tag,mode,Mass,pI,Length,Aliphatic_Index,Net_Charge,Hydropathy,Charge_Per_Residue,SVM_Class,SVM_AMP_Prob,RF_Class,RF_AMP_Prob,DA_Class,DA_AMP_Prob,Filename,Myrowid,UniqueID,Species,Date_Raw_Data_Acquired,Location,Author) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
                 if DNColumnCheck(myrow) is True:
                     try:
                         c.execute(PutDeNovoExcelInSQL, myrow)
