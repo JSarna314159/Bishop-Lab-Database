@@ -5,7 +5,7 @@ Created on Fri Oct 26 17:51:11 2018
 @author: Jackie
 """
 
-#20190117
+#20190228
 
 #import cProfile
 import os
@@ -53,17 +53,10 @@ def FileNameInformation(myfilename):
     
     locatedate = timestampregex.search(myfilename)
     if locatedate:
-        Date_Raw_Data_Acquired = locatedate.group()
+        mm,dd,yy = locatedate.group(1,2,3)
+        Date_Raw_Data_Acquired = "20" + yy + "-" + mm + "-" + dd
     else:
         Date_Raw_Data_Acquired = ''
-        
-#obj1 = Date_Raw_Data_Acquired[0:2:1]
-#obj2 = Date_Raw_Data_Acquired[2:4:1]
-#obj3 = Date_Raw_Data_Acquired[4:6:1]
-#obj3 = str((int(obj3) + 2000))
-
-#Date_Raw_Data_Acquired = obj3 + obj2 + obj1
-
     
     if NYU.search(myfilename):
         Location = "NYU"
