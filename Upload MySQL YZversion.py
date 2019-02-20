@@ -5,6 +5,8 @@ Created on Thu Sep  6 15:51:16 2018
 @author: jsarna
 """
 
+#20180918
+
 #import cProfile
 import os
 from os import listdir
