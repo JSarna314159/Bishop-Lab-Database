@@ -5,7 +5,7 @@ Created on Fri Oct 26 17:51:11 2018
 @author: Jackie
 """
 
-#20181203
+#20181203b
 
 #import cProfile
 import os
@@ -132,7 +132,7 @@ def DBColumnCheck(myrow):
     elif NC.match(myrow[9]):
         myrow[9] = None
     else:
-        print('Column error [9]')    
+        print('Column error [9]')
         return False
     if isinstance(myrow[10], float) is True: #'pI'
         pass
@@ -204,6 +204,21 @@ def DBColumnCheck(myrow):
     else:
         print('Column error [19]')
         return False
+    if NAMP.match(myrow[20]): #'DA_Class'
+        myrow[20] = None
+    elif NC.match(myrow[20]): 
+        myrow[20] = None
+    else:
+        print('Column error [20]')
+        return False
+    if isinstance(myrow[21], float) is True: #'DA_AMP_Prob'
+        pass
+    elif NC.match(myrow[21]):
+        myrow[21] = None
+    else:
+        print('Column error [21]')
+        return False
+    return True
 
 def DNColumnCheck(myrow):
     yesno = re.compile('Y|N') #column must either have 'Y' or 'N'
@@ -419,9 +434,8 @@ def UPLOADFUNCTION():
                 myrow.append(myfilename)
                 myrow.append(i+1)
                 myrow.append(myfilename + str(i+1))
-                myrow.extend(FileNameInformation(myfilename))
-                
-                PutExcelInSQL = '''INSERT INTO Raw_Data(ID,Peptide,Peaks_Probability_Score,ppm,m_over_z,RT,Scan,Accession,PTM,Mass,pI,Length,Aliphatic_Index,Net_Charge,Hydropathy,Charge_Per_Residue,SVM_Class,SVM_AMP_Prob,RF_Class,RF_AMP_Prob,DA_Class,DA_AMP_Prob,Filename,Myrowid,UniqueID,Species,Date_Raw_Data_Acquired,Location,Author) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+                myrow.extend(FileNameInformation(myfilename))   
+                PutExcelInSQL = '''INSERT INTO Raw_Data(ID,Peptide,Peaks_Probability_Score,ppm,m_over_z,RT,Scan,Accession,PTM,Mass,pI,Length,Aliphatic_Index,Net_Charge,Hydropathy,Charge_Per_Residue,SVM_Class,SVM_AMP_Prob,RF_Class,RF_AMP_Prob,DA_Class,DA_AMP_Prob,Filename,Myrowid,UniqueID,Species,Date_Raw_Data_Acquired,Location,Author) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s, %s)'''
                 if DBColumnCheck(myrow) is True:
                     try:
                         c.execute(PutExcelInSQL, myrow)
