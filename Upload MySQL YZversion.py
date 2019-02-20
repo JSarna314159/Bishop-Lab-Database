@@ -5,7 +5,7 @@ Created on Thu Sep  6 15:51:16 2018
 @author: jsarna
 """
 
-#20180918
+#20180923
 
 #import cProfile
 import os
@@ -49,13 +49,13 @@ def FileNameInformation(myfilename):
     elif Gharial.search(myfilename):
         Species = "Gharial"
     else:
-        Species = None
+        Species = ''
     
     locatedate = timestampregex.search(myfilename)
     if locatedate:
         Date_Raw_Data_Acquired = locatedate.group()
     else:
-        Date_Raw_Data_Acquired = None
+        Date_Raw_Data_Acquired = ''
     
     if NYU.search(myfilename):
         Location = "NYU"
@@ -64,7 +64,7 @@ def FileNameInformation(myfilename):
     elif JHU.search(myfilename):
         Location = "JHU"
     else:
-        Location = None
+        Location = ''
     
     if MCD.search(myfilename):
         Author = "MCD"
@@ -77,7 +77,7 @@ def FileNameInformation(myfilename):
     elif CHO.search(myfilename):
         Author = "CHO"
     else:
-        Author = None
+        Author = ''
     return Species, Date_Raw_Data_Acquired, Location, Author
 
 def DBColumnCheck(myrow):
@@ -404,7 +404,7 @@ def UPLOADFUNCTION():
                 myrow.append(i+1)
                 myrow.append(myfilename + str(i+1))
                 myrow.extend(FileNameInformation(myfilename))
-                PutDeNovoExcelInSQL = '''INSERT INTO De_Novo(DNID,Scan,Peptide,Tag_length,ALC,M_over_Z,Z,RT,ppm,PTM,Local_Confidence,tag,mode,Mass,pI,Length,Aliphatic_Index,Net_Charge,Hydropathy,Charge_Per_Residue,SVM_Class,SVM_AMP_Prob,RF_Class,RF_AMP_Prob,DA_Class,DA_AMP_Prob,Filename,Myrowid,UniqueID,Species,Date_Raw_Data_Acquired,Location,Author) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'''
+                PutDeNovoExcelInSQL = '''INSERT INTO De_Novo(DNID,Scan,Peptide,Tag_length,ALC,M_over_Z,Z,RT,ppm,PTM,Local_Confidence,tag,mode,Mass,pI,Length,Aliphatic_Index,Net_Charge,Hydropathy,Charge_Per_Residue,SVM_Class,SVM_AMP_Prob,RF_Class,RF_AMP_Prob,DA_Class,DA_AMP_Prob,Filename,Myrowid,UniqueID,Species,Date_Raw_Data_Acquired,Location,Author) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
                 if DNColumnCheck(myrow) is True:
                     try:
                         c.execute(PutDeNovoExcelInSQL, myrow)
@@ -421,7 +421,7 @@ def UPLOADFUNCTION():
             src2 = source2 + myfile
             shutil.move(src2, FileDestination2)
             db.commit()
-            print('conn.commit: values saved')
+            print('db.commit: values saved')
         elif '.xls' in myfile:
             xl = xlrd.open_workbook(mypath + myfile)
             worksheet = xl.sheet_by_name("Raw Data")
@@ -436,7 +436,7 @@ def UPLOADFUNCTION():
                 myrow.append(i+1)
                 myrow.append(myfilename + str(i+1))
                 myrow.extend(FileNameInformation(myfilename))
-                PutExcelInSQL = '''INSERT INTO Raw_Data(ID,Peptide,Peaks_Probability_Score,ppm,m_over_z,RT,Scan,Accession,PTM,Mass,pI,Length,Aliphatic_Index,Net_Charge,Hydropathy,Charge_Per_Residue,SVM_Class,SVM_AMP_Prob,RF_Class,RF_AMP_Prob,DA_Class,DA_AMP_Prob,Filename,Myrowid,UniqueID,Species,Date_Raw_Data_Acquired,Location,Author) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'''
+                PutExcelInSQL = '''INSERT INTO Raw_Data(ID,Peptide,Peaks_Probability_Score,ppm,m_over_z,RT,Scan,Accession,PTM,Mass,pI,Length,Aliphatic_Index,Net_Charge,Hydropathy,Charge_Per_Residue,SVM_Class,SVM_AMP_Prob,RF_Class,RF_AMP_Prob,DA_Class,DA_AMP_Prob,Filename,Myrowid,UniqueID,Species,Date_Raw_Data_Acquired,Location,Author) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
                 if DBColumnCheck(myrow) is True:
                     try:
                         c.execute(PutExcelInSQL, myrow)
@@ -453,7 +453,7 @@ def UPLOADFUNCTION():
             src = source + myfile
             shutil.move(src, FileDestination)
             db.commit()
-            print('conn.commit: values saved')
+            print('db.commit: values saved')
     db.close()
 
 UPLOADFUNCTION()
