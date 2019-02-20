@@ -5,7 +5,7 @@ Created on Fri Oct 26 17:51:11 2018
 @author: Jackie
 """
 
-#20181129
+#20181203
 
 #import cProfile
 import os
@@ -132,8 +132,7 @@ def DBColumnCheck(myrow):
     elif NC.match(myrow[9]):
         myrow[9] = None
     else:
-        print('Column error [9]')
-    
+        print('Column error [9]')    
         return False
     if isinstance(myrow[10], float) is True: #'pI'
         pass
@@ -421,7 +420,8 @@ def UPLOADFUNCTION():
                 myrow.append(i+1)
                 myrow.append(myfilename + str(i+1))
                 myrow.extend(FileNameInformation(myfilename))
-                PutExcelInSQL = '''INSERT INTO Raw_Data(ID,Peptide,Peaks_Probability_Score,ppm,m_over_z,RT,Scan,Accession,PTM,Mass,pI,Length,Aliphatic_Index,Net_Charge,Hydropathy,Charge_Per_Residue,SVM_Class,SVM_AMP_Prob,RF_Class,RF_AMP_Prob,DA_Class,DA_AMP_Prob,Filename,Myrowid,UniqueID,Species,Date_Raw_Data_Acquired,Location,Author) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+                
+                PutExcelInSQL = '''INSERT INTO Raw_Data(ID,Peptide,Peaks_Probability_Score,ppm,m_over_z,RT,Scan,Accession,PTM,Mass,pI,Length,Aliphatic_Index,Net_Charge,Hydropathy,Charge_Per_Residue,SVM_Class,SVM_AMP_Prob,RF_Class,RF_AMP_Prob,DA_Class,DA_AMP_Prob,Filename,Myrowid,UniqueID,Species,Date_Raw_Data_Acquired,Location,Author) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
                 if DBColumnCheck(myrow) is True:
                     try:
                         c.execute(PutExcelInSQL, myrow)
