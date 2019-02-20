@@ -1,11 +1,11 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 """
 Created on Fri Oct 26 17:51:11 2018
 
 @author: Jackie
 """
 
-#20181029
+#20181129
 
 #import cProfile
 import os
@@ -133,6 +133,7 @@ def DBColumnCheck(myrow):
         myrow[9] = None
     else:
         print('Column error [9]')
+    
         return False
     if isinstance(myrow[10], float) is True: #'pI'
         pass
@@ -154,7 +155,7 @@ def DBColumnCheck(myrow):
         myrow[12] = None
     else:
         print('Column error [12]')
-        return False    
+        return False
     if isinstance(myrow[13], float) is True: #'Net_Charge'
         pass
     elif NC.match(myrow[13]):
@@ -272,7 +273,7 @@ def DNColumnCheck(myrow):
     else:
         print('Column error [12]')
         return False
-    if PosInts.match(myrow[13]): #'Mass'
+    if PosFloats.match(myrow[13]): #'Mass'
         pass
     elif NC.match(myrow[13]): 
         myrow[13] = None
