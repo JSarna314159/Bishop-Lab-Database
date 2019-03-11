@@ -206,7 +206,7 @@ def DBColumnCheck(myrow):
         print('Column error [19]')
         return False
     if NAMP.match(myrow[20]): #'DA_Class'
-        myrow[20] = None
+        pass
     elif NC.match(myrow[20]): 
         myrow[20] = None
     else:
